@@ -13,7 +13,7 @@ Build the image from Dockerfile:
 docker build . -t hello-docker
 ```
 
-Tag the image (`1.0` is version, see list of versions at [Docker Hub](https://hub.docker.com/r/trillion1e12/hello-docker))
+Tag the image (`1.0` is version, replace them when upgrading)
 
 ```bash
 docker tag hello-docker trillion1e12/hello-docker:1.0
@@ -35,7 +35,7 @@ docker push trillion1e12/hello-docker:latest
 Run the docker image:
 
 ```bash
-docker run -p 8080:8080 -d trillion1e12/hello-docker:1.0
+docker run -p 8080:8080 -d trillion1e12/hello-docker
 ```
 
 ## Versions
@@ -61,6 +61,22 @@ WORKDIR /app
 COPY . .
 RUN ./gradlew build
 ENTRYPOINT [ "java", "-jar", "build/libs/hello-docker-0.0.1-SNAPSHOT.jar" ]
+```
+
+## `3.0`
+
+Multi-stage build
+
+```Dockerfile
+FROM eclipse-temurin:21-jdk AS stage-1
+WORKDIR /app
+COPY . .
+RUN ./gradlew build
+
+FROM eclipse-temurin:21-jre AS stage-2
+WORKDIR /app
+COPY --from=stage-1 /app/build/libs/hello-docker-0.0.1-SNAPSHOT.jar ./app.jar
+ENTRYPOINT [ "java", "-jar", "app.jar" ]
 ```
 
 ## Using Kubernetes
