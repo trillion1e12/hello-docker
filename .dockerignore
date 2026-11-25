@@ -1,4 +1,8 @@
 README.md
+.dockerignore
+.env
+.git
+.gitignore
 
 # copied from .gitignore
 HELP.md

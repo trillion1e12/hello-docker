@@ -63,7 +63,7 @@ RUN ./gradlew build
 ENTRYPOINT [ "java", "-jar", "build/libs/hello-docker-0.0.1-SNAPSHOT.jar" ]
 ```
 
-## `3.0`
+### `3.0`
 
 Multi-stage build
 
@@ -76,6 +76,22 @@ RUN ./gradlew build
 FROM eclipse-temurin:21-jre AS stage-2
 WORKDIR /app
 COPY --from=stage-1 /app/build/libs/hello-docker-0.0.1-SNAPSHOT.jar ./app.jar
+ENTRYPOINT [ "java", "-jar", "app.jar" ]
+```
+
+### `4.0`
+
+Stop hard coding JAR filename
+
+```Dockerfile
+FROM eclipse-temurin:21-jdk AS stage-1
+WORKDIR /app
+COPY . .
+RUN ./gradlew bootJar
+
+FROM eclipse-temurin:21-jre AS stage-2
+WORKDIR /app
+COPY --from=stage-1 /app/build/libs/*.jar ./app.jar
 ENTRYPOINT [ "java", "-jar", "app.jar" ]
 ```
 
