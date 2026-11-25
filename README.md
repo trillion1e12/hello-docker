@@ -51,6 +51,26 @@ COPY ./build/libs/hello-docker-0.0.1-SNAPSHOT.jar ./app.jar
 ENTRYPOINT [ "java", "-jar", "app.jar" ]
 ```
 
+## Using Kubernetes
+
+Create the pod:
+
+```bash
+kubectl run hello-pod --image=trillion1e12/hello-docker
+```
+
+Create a NodePort service for the pod:
+
+```bash
+kubectl expose pod hello-pod --port=8080 --type=NodePort --name=hello-service
+```
+
+(Minikube in WSL2) Expose the service for external access localhost URL
+
+```bash
+minikube service hello-service --url
+```
+
 ## References
 
 - https://docs.docker.com/learn/paths/build-and-share-your-own-images/
