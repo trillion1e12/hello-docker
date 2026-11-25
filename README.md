@@ -25,6 +25,13 @@ Push the image (login required)
 docker push trillion1e12/hello-docker:1.0
 ```
 
+Push `latest` too
+
+```bash
+docker tag trillion1e12/hello-docker:1.0 trillion1e12/hello-docker:latest
+docker push trillion1e12/hello-docker:latest
+```
+
 Run the docker image:
 
 ```bash
