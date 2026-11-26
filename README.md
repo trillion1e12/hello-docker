@@ -115,6 +115,14 @@ kubectl expose pod hello-pod --port=8080 --type=NodePort --name=hello-service
 minikube service hello-service --url
 ```
 
+## Pushing to AWS ECR
+
+Install AWS CLI, login, create ECR private repository (through console), then push
+
+- https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
+- https://docs.aws.amazon.com/cli/latest/userguide/getting-started-quickstart.html
+- https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-sign-in.html
+
 ## References
 
 - https://docs.docker.com/learn/paths/build-and-share-your-own-images/
