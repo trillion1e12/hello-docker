@@ -117,7 +117,7 @@ minikube service hello-service --url
 
 ### Using EKS
 
-Create cluster
+Create cluster (15 minutes)
 
 ```bash
 eksctl create cluster --name hello-eks --node-type t3.small --nodes 1
@@ -130,7 +130,7 @@ To send request from outside:
 - Add inbound rule for the port that NodePort exposed, with Custom TCP and 0.0.0.0/0 source
 - Now we can send request to the public IP of instance and exposed port
 
-Delete cluster
+Delete cluster (10 minutes)
 
 ```bash
 eksctl delete cluster --name hello-eks
