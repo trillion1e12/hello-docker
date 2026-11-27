@@ -115,6 +115,27 @@ kubectl expose pod hello-pod --port=8080 --type=NodePort --name=hello-service
 minikube service hello-service --url
 ```
 
+### Using EKS
+
+Create cluster
+
+```bash
+eksctl create cluster --name hello-eks --node-type t3.small --nodes 1
+```
+
+Create pod and service: Similar to above
+
+To send request from outside:
+- Go to EC2 and into the instance, select Security and click Security groups
+- Add inbound rule for the port that NodePort exposed, with Custom TCP and 0.0.0.0/0 source
+- Now we can send request to the public IP of instance and exposed port
+
+Delete cluster
+
+```bash
+eksctl delete cluster --name hello-eks
+```
+
 ## Pushing to AWS ECR
 
 Install AWS CLI, login, create ECR private repository (through console), then push
